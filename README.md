@@ -52,9 +52,24 @@ public/         # Static files (favicon, icons, etc.)
 
 Share the app link with external users. Admin opens the spreadsheet link to view data.
 
+## Deployment to Vercel
+
+1. **Push your code** to GitHub (or GitLab/Bitbucket).
+2. **Import project** in [Vercel](https://vercel.com):
+   - New Project → Import your repository
+   - Framework Preset: **Vite** (auto-detected)
+   - Root Directory: `./` (default)
+3. **Environment Variables** (in Vercel dashboard → Settings → Environment Variables):
+   - `VITE_SHEETS_SCRIPT_URL` = your Google Apps Script Web app URL (ends with `/exec`)
+   - `VITE_SHEETS_VIEW_URL` = your spreadsheet URL (optional)
+4. **Deploy** — Vercel will build and deploy automatically.
+
+The app includes a serverless function (`api/sheets.js`) that proxies requests to your Google Apps Script, avoiding CORS issues in production.
+
 ## Tech stack
 
 - React 18
 - Vite 6, Tailwind CSS
 - vite-plugin-pwa (service worker, offline)
 - Google Sheets via Apps Script (no sign-in, one shared sheet)
+- Vercel serverless function for API proxy

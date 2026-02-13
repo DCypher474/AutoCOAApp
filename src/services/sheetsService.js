@@ -28,7 +28,8 @@ export async function appendToSheet(rowData) {
     return { ok: false, message: 'Unable to submit. Please try again later.' }
   }
 
-  const url = import.meta.env.DEV ? '/api/sheets' : scriptUrl
+  // Use Vercel serverless function in production, or direct script URL if API route not available
+  const url = '/api/sheets'
   const payload = { action: 'append', data: rowData }
 
   try {
